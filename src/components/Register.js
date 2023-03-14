@@ -18,29 +18,15 @@ function Register(props) {
     }
 
     useEffect(() => {
-        if(props.isRegistered!==null) {
+        if (props.isRegistered !== null) {
             props.setIsOpenPopup({ isInfoTooltipPopupOpen: true })
+            props.setIsRegistered(null);
         }
     }, [props.isRegistered])
 
     function handleSubmit(evt) {
         evt.preventDefault();
-        auth.register(formValue)
-            .then((res) => {
-              if(res.data) {
-                  props.setIsRegistered(true);
-                  console.log(props.isRegistered);
-              } else {
-                  props.setIsRegistered(false);
-                  console.log(res);
-              }
-              
-            })
-            .catch((err) => {
-              console.log(err);
-              props.setIsRegistered(false);
-            })
-        
+        props.onRegister(formValue);
     }
 
     return (
