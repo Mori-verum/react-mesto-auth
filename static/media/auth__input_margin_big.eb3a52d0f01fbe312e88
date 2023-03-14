@@ -1,0 +1,9 @@
+// Imports
+import ___CSS_LOADER_API_SOURCEMAP_IMPORT___ from "../../../../../node_modules/css-loader/dist/runtime/sourceMaps.js";
+import ___CSS_LOADER_API_IMPORT___ from "../../../../../node_modules/css-loader/dist/runtime/api.js";
+var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(___CSS_LOADER_API_SOURCEMAP_IMPORT___);
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, ".auth__input_margin_big {\r\n    margin-top: 50px;\r\n}", "",{"version":3,"sources":["webpack://./src/blocks/auth/__input/_margin/auth__input_margin_big"],"names":[],"mappings":"AAAA;IACI,gBAAgB;AACpB","sourcesContent":[".auth__input_margin_big {\r\n    margin-top: 50px;\r\n}"],"sourceRoot":""}]);
+// Exports
+___CSS_LOADER_EXPORT___.locals = {};
+export default ___CSS_LOADER_EXPORT___;
