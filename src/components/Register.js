@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import * as auth from '../auth'
 
 function Register(props) {
     const [formValue, setFormValue] = useState({
@@ -17,16 +16,10 @@ function Register(props) {
         });
     }
 
-    useEffect(() => {
-        if (props.isRegistered !== null) {
-            props.setIsOpenPopup({ isInfoTooltipPopupOpen: true })
-            props.setIsRegistered(null);
-        }
-    }, [props.isRegistered])
-
     function handleSubmit(evt) {
         evt.preventDefault();
         props.onRegister(formValue);
+        props.setIsOpenPopup({ isInfoTooltipPopupOpen: true });
     }
 
     return (

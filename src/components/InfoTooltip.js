@@ -6,7 +6,7 @@ function InfoTooltip(props) {
     const navigate = useNavigate();
 
     function handleClose() {
-        props.setIsSuccessful(null);
+        props.setInfoTooltipState({isSuccess: false});
         props.onClose();
         navigate('/sign-in', { replace: true });
     }
@@ -14,9 +14,9 @@ function InfoTooltip(props) {
     return (
         <div className={`popup popup_info-tooltip ${props.isOpen ? 'popup_opened' : ''}`}>
             <div className="popup__container">
-                <img className='popup__registration-sign' alt="" src={props.isSuccessful ? successful : unsuccessful} />
-                <p className='popup__subtitle'>{props.textForInfoTooltip}</p>
-                <button aria-label="Закрыть модальное окно" type="button" className="popup__close-button" onClick={props.isSuccessful ? handleClose : props.onClose}></button>
+                <img className='popup__registration-sign' alt="" src={props.infoTooltipState.isSuccess ? successful : unsuccessful} />
+                <p className='popup__subtitle'>{props.infoTooltipState.text}</p>
+                <button aria-label="Закрыть модальное окно" type="button" className="popup__close-button" onClick={props.infoTooltipState.isSuccess ? handleClose : props.onClose}></button>
             </div>
         </div>
     )

@@ -17,8 +17,9 @@ import InfoTooltip from './InfoTooltip.js'
 import * as auth from '../auth.js';
 
 function App() {
-  const [isSuccessful, setIsSuccessful] = useState(null);
-  const [textForInfoTooltip, setTextForInfoTooltip] = useState('');
+  const [infoTooltipState, setInfoTooltipState] = useState({isSuccess: null, text: ''})
+  // const [isSuccessful, setIsSuccessful] = useState(null);
+  // const [textForInfoTooltip, setTextForInfoTooltip] = useState('');
   const [currentUser, setCurrentUser] = useState({});
   const [userEmail, setUserEmail] = useState('');
   const [cards, setCards] = useState([])
@@ -186,10 +187,8 @@ function handleLogin(formValue) {
       navigate('/', { replace: true });
     })
     .catch(err => {
-      setIsSuccessful(false);
-      setTextForInfoTooltip('Что-то пошло не так! Попробуйте ещё раз.');
+      setInfoTooltipState({isSuccess: false, text: 'Что-то пошло не так! Попробуйте ещё раз.'});
       setIsOpenPopup({ isInfoTooltipPopupOpen: true });
-      setIsSuccessful(null);
     });
 }
 
@@ -201,18 +200,13 @@ function handleRegister(formValue) {
   auth.register(formValue)
     .then((res) => {
       if (res.data) {
-        setIsSuccessful(true);
-        console.log(isSuccessful);
-        setTextForInfoTooltip('Вы успешно зарегистрировались!');
+        setInfoTooltipState({isSuccess: true, text: 'Вы успешно зарегистрировались!'});
       } else {
-        setIsSuccessful(false);
-        setTextForInfoTooltip('Что-то пошло не так! Попробуйте ещё раз.');
+        setInfoTooltipState({isSuccess: false, text: 'Что-то пошло не так! Попробуйте ещё раз.'});
       }
-
     })
     .catch((err) => {
-      setIsSuccessful(false);
-      setTextForInfoTooltip('Что-то пошло не так! Попробуйте ещё раз.');
+      setInfoTooltipState({isSuccess: false, text: 'Что-то пошло не так! Попробуйте ещё раз.'});
     })
 }
 
@@ -243,7 +237,7 @@ return (
       <Routes>
         <Route
           path="/sign-up"
-          element={<Register onRegister={handleRegister} isRegistered={isSuccessful} setIsRegistered={setIsSuccessful} setIsOpenPopup={setIsOpenPopup} />}
+          element={<Register onRegister={handleRegister} isRegistered={infoTooltipState.isSuccess} setInfoTooltipState={setInfoTooltipState} setIsOpenPopup={setIsOpenPopup} />}
         />
         <Route
           path="/sign-in"
@@ -263,11 +257,10 @@ return (
       </Routes>
       <Footer />
       <InfoTooltip
-        textForInfoTooltip={textForInfoTooltip}
+      infoTooltipState={infoTooltipState}
+      setInfoTooltipState={setInfoTooltipState}
         onClose={closeAllPopups}
         isOpen={isOpenPopup.isInfoTooltipPopupOpen}
-        isSuccessful={isSuccessful}
-        setIsSuccessful={setIsSuccessful}
       />
 
       {/* <Main
